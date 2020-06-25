@@ -9,3 +9,7 @@ spring.jpa:
   #hibernate.ddl-auto: none
   #generate-ddl: false
   #properties.hibernate.hbm2ddl.auto: none
+
+feign:
+  hystrix:
+    enabled: true
