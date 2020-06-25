@@ -25,6 +25,9 @@ public class ProcessingRest {
     @RequestMapping("/issue/{accountId}")
     public String issueNewCard(@PathVariable Integer accountId) {
         final String card = cardServiceClient.createCard();
+        if (card == null) {
+            return "CARD_SERVICE_NOT_AVAILABLE";
+        }
         ProcessingEntity pe = new ProcessingEntity();
         pe.setCard(card);
         pe.setAccountId(accountId);
