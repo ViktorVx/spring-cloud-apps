@@ -1,5 +1,6 @@
 package org.pva.spring.cloud;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,5 +53,18 @@ public class ProcessingRest {
             map.put(pe.getAccountId(), pe.getCard());
         }
         return map;
+    }
+
+    @HystrixCommand(fallbackMethod = "testFallback")
+    @RequestMapping("/test")
+    public String testHystrix(Boolean fail) {
+        if (Boolean.TRUE.equals(fail)) {
+            throw new RuntimeException();
+        }
+        return "OK";
+    }
+
+    private String testFallback(Boolean fail) {
+        return "FAILED";
     }
 }
