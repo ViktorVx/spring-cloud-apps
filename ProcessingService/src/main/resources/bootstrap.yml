@@ -12,3 +12,4 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:8701/eureka,http://localhost:8702/eureka
     should-unregister-on-shutdown: false
+management.endpoints.web.exposure.include: hystrix.stream
